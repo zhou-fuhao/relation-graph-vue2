@@ -262,7 +262,7 @@ export default {
     overflow: hidden;
     outline: none !important;
     flex-grow: 1;
-    background-image: url("../../assets/point.png");
+    background-image: url("../../assets/images/point.png");
 
     #table-flow {
       position: relative;

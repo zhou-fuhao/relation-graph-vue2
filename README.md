@@ -1,6 +1,7 @@
-# atlas
+# relation-graph-vue2
 
-> A Vue.js project
+> 使用G6、X6、JsPlumb等实现血缘关系图谱
+> 使用Element-UI table表格实现甘特图
 
 ## Build Setup
 

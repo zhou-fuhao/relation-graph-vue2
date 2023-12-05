@@ -6,11 +6,13 @@ import router from "./router";
 import jsPlumb from "jsplumb";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
+import Empty from "./components/Empty.vue";
 
 Vue.config.productionTip = false;
 Vue.prototype.$jsPlumb = jsPlumb.jsPlumb;
 
 Vue.use(ElementUI);
+Vue.component("v-empty", Empty);
 
 /* eslint-disable no-new */
 new Vue({

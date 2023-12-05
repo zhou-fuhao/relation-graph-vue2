@@ -109,9 +109,17 @@ const router = new Router({
           path: "/TableDemo5",
           name: "TableDemo5",
           component: () => import("@/page/table/demo5.vue")
-        }
+        },
         // ------------------Table---------------------
+        {
+          path: "/empty",
+          component: () => import("@/components/Empty.vue")
+        }
       ]
+    },
+    {
+      path: "/empty",
+      component: () => import("@/components/Empty.vue")
     }
   ]
 });
@@ -124,5 +132,10 @@ router.beforeEach((to, from, next) => {
   } else {
     document.title = "relation-graph-vue2";
   }
-  next();
+
+  if (to.matched.length === 0) {
+    next("/empty");
+  } else {
+    next();
+  }
 });

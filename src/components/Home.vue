@@ -1,6 +1,6 @@
 <template>
   <el-container class="app-home">
-    <el-aside class="app-home-aside" width="200px">
+    <el-aside class="app-home-aside" width="220px">
       <el-menu :router="true" :unique-opened="true">
         <el-submenu :index="item.id" :key="item.id" v-for="(item) in menuData">
           <template slot="title">
@@ -57,13 +57,27 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .app-home {
   height: calc(100vh - 20px);
   border: 1px solid #eee;
-}
 
-.app-home-aside {
-  background-color: rgb(238, 241, 246);
+  &-aside {
+    background-color: rgb(238, 241, 246);
+  }
+
+  &-aside::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &-aside::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  &-aside::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+  }
 }
 </style>

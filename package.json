@@ -1,7 +1,7 @@
 {
   "name": "relation-graph-vue2",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "使用G6、X6、JsPlumb等实现血缘关系图谱",
   "author": "zhoufuhao <zhoufuhao@hotmail.com>",
   "private": true,
   "scripts": {
