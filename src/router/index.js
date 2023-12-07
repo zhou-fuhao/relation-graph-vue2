@@ -39,20 +39,55 @@ const router = new Router({
         // ------------------G6---------------------
 
         // ------------------Graph---------------------
-        // {
-        //   path: "/GraphDemo1",
-        //   name: "GraphDemo1",
-        //   component: () => import("@/page/graph/demo1.vue")
-        // },
-        // {
-        //   path: "/GraphDemo2",
-        //   name: "GraphDemo2",
-        //   component: () => import("@/page/graph/demo2.vue")
-        // },
+        {
+          path: "/GraphDemo1",
+          name: "GraphDemo1",
+          component: () => import("@/page/graph/demo1.vue")
+        },
+        {
+          path: "/GraphDemo2",
+          name: "GraphDemo2",
+          component: () => import("@/page/graph/demo2.vue")
+        },
         {
           path: "/GraphDemo3",
           name: "GraphDemo3",
           component: () => import("@/page/graph/demo3.vue")
+        },
+        {
+          path: "/GraphDemo4",
+          name: "GraphDemo4",
+          component: () => import("@/page/graph/demo4.vue")
+        },
+        {
+          path: "/GraphDemo5",
+          name: "GraphDemo5",
+          component: () => import("@/page/graph/demo5.vue")
+        },
+        {
+          path: "/GraphDemo6",
+          name: "GraphDemo6",
+          component: () => import("@/page/graph/demo6.vue")
+        },
+        {
+          path: "/GraphDemo7",
+          name: "GraphDemo7",
+          component: () => import("@/page/graph/demo7.vue")
+        },
+        {
+          path: "/GraphDemo8",
+          name: "GraphDemo8",
+          component: () => import("@/page/graph/demo8.vue")
+        },
+        {
+          path: "/GraphDemo9",
+          name: "GraphDemo9",
+          component: () => import("@/page/graph/demo9.vue")
+        },
+        {
+          path: "/GraphDemo10",
+          name: "GraphDemo10",
+          component: () => import("@/page/graph/demo10.vue")
         },
         // ------------------G6---------------------
 
