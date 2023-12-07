@@ -246,7 +246,7 @@
     "fecha" "~4.2.0"
     "tslib" "^2.0.0"
 
-"@antv/util@^2.0.13", "@antv/util@^2.0.7", "@antv/util@^2.0.9", "@antv/util@~2.0.0", "@antv/util@~2.0.13", "@antv/util@~2.0.3", "@antv/util@~2.0.5":
+"@antv/util@^2.0.13":
   "integrity" "sha512-o6I9hi5CIUvLGDhth0RxNSFDRwXeywmt6ExR4+RmVAzIi48ps6HUy+svxOCayvrPBN37uE6TAc2KDofRo0nK9Q=="
   "resolved" "https://registry.npmjs.org/@antv/util/-/util-2.0.17.tgz"
   "version" "2.0.17"
@@ -254,7 +254,23 @@
     "csstype" "^3.0.8"
     "tslib" "^2.0.3"
 
-"@antv/util@^3.3.2":
+"@antv/util@^2.0.7":
+  "integrity" "sha512-o6I9hi5CIUvLGDhth0RxNSFDRwXeywmt6ExR4+RmVAzIi48ps6HUy+svxOCayvrPBN37uE6TAc2KDofRo0nK9Q=="
+  "resolved" "https://registry.npmjs.org/@antv/util/-/util-2.0.17.tgz"
+  "version" "2.0.17"
+  dependencies:
+    "csstype" "^3.0.8"
+    "tslib" "^2.0.3"
+
+"@antv/util@^2.0.9":
+  "integrity" "sha512-o6I9hi5CIUvLGDhth0RxNSFDRwXeywmt6ExR4+RmVAzIi48ps6HUy+svxOCayvrPBN37uE6TAc2KDofRo0nK9Q=="
+  "resolved" "https://registry.npmjs.org/@antv/util/-/util-2.0.17.tgz"
+  "version" "2.0.17"
+  dependencies:
+    "csstype" "^3.0.8"
+    "tslib" "^2.0.3"
+
+"@antv/util@^3.3.2", "@antv/util@^3.3.5":
   "integrity" "sha512-bVv1loamL/MgUEN9dNt7VKAsghO4Wgb+kzr8B9TgkM5tHgKk++xiTwi3pejIdgU8DDkzcyaRsO+VTOXJt8jLng=="
   "resolved" "https://registry.npmjs.org/@antv/util/-/util-3.3.5.tgz"
   "version" "3.3.5"
@@ -263,6 +279,38 @@
     "flru" "^1.0.2"
     "gl-matrix" "^3.3.0"
     "tslib" "^2.3.1"
+
+"@antv/util@~2.0.0":
+  "integrity" "sha512-o6I9hi5CIUvLGDhth0RxNSFDRwXeywmt6ExR4+RmVAzIi48ps6HUy+svxOCayvrPBN37uE6TAc2KDofRo0nK9Q=="
+  "resolved" "https://registry.npmjs.org/@antv/util/-/util-2.0.17.tgz"
+  "version" "2.0.17"
+  dependencies:
+    "csstype" "^3.0.8"
+    "tslib" "^2.0.3"
+
+"@antv/util@~2.0.13":
+  "integrity" "sha512-o6I9hi5CIUvLGDhth0RxNSFDRwXeywmt6ExR4+RmVAzIi48ps6HUy+svxOCayvrPBN37uE6TAc2KDofRo0nK9Q=="
+  "resolved" "https://registry.npmjs.org/@antv/util/-/util-2.0.17.tgz"
+  "version" "2.0.17"
+  dependencies:
+    "csstype" "^3.0.8"
+    "tslib" "^2.0.3"
+
+"@antv/util@~2.0.3":
+  "integrity" "sha512-o6I9hi5CIUvLGDhth0RxNSFDRwXeywmt6ExR4+RmVAzIi48ps6HUy+svxOCayvrPBN37uE6TAc2KDofRo0nK9Q=="
+  "resolved" "https://registry.npmjs.org/@antv/util/-/util-2.0.17.tgz"
+  "version" "2.0.17"
+  dependencies:
+    "csstype" "^3.0.8"
+    "tslib" "^2.0.3"
+
+"@antv/util@~2.0.5":
+  "integrity" "sha512-o6I9hi5CIUvLGDhth0RxNSFDRwXeywmt6ExR4+RmVAzIi48ps6HUy+svxOCayvrPBN37uE6TAc2KDofRo0nK9Q=="
+  "resolved" "https://registry.npmjs.org/@antv/util/-/util-2.0.17.tgz"
+  "version" "2.0.17"
+  dependencies:
+    "csstype" "^3.0.8"
+    "tslib" "^2.0.3"
 
 "@antv/x6-common@^2.0.16":
   "integrity" "sha512-iT60SnTpzoXJwURH+ERYGsTQ8lOuXd7nBuDhgx135VdBG88TizgKrSknz35k8+6j6Qv7O8mRDCGmi2He9li8kg=="

@@ -31,11 +31,51 @@ const router = new Router({
           name: "G6Demo1",
           component: () => import("@/page/g6/demo1.vue")
         },
-        // {
-        //   path: "/G6Demo2",
-        //   name: "G6Demo2",
-        //   component: () => import("@/page/g6/demo2.vue")
-        // },
+        {
+          path: "/G6Demo2",
+          name: "G6Demo2",
+          component: () => import("@/page/g6/demo2.vue")
+        },
+        {
+          path: "/G6Demo3",
+          name: "G6Demo3",
+          component: () => import("@/page/g6/demo3.vue")
+        },
+        {
+          path: "/G6Demo4",
+          name: "G6Demo4",
+          component: () => import("@/page/g6/demo4.vue")
+        },
+        {
+          path: "/G6Demo5",
+          name: "G6Demo5",
+          component: () => import("@/page/g6/demo5.vue")
+        },
+        {
+          path: "/G6Demo6",
+          name: "G6Demo6",
+          component: () => import("@/page/g6/demo6.vue")
+        },
+        {
+          path: "/G6Demo7",
+          name: "G6Demo7",
+          component: () => import("@/page/g6/demo7.vue")
+        },
+        {
+          path: "/G6Demo8",
+          name: "G6Demo8",
+          component: () => import("@/page/g6/demo8.vue")
+        },
+        {
+          path: "/G6Demo9",
+          name: "G6Demo9",
+          component: () => import("@/page/g6/demo9.vue")
+        },
+        {
+          path: "/G6Demo10",
+          name: "G6Demo10",
+          component: () => import("@/page/g6/demo10.vue")
+        },
         // ------------------G6---------------------
 
         // ------------------Graph---------------------

@@ -38,9 +38,9 @@ export default {
     return {
       menuData: [],
       arr: [
-        { id: '1', icon: 'el-icon-ice-cream-round', label: 'G6', name: 'G6', },
-        { id: '2', icon: 'el-icon-ice-cream-square', label: 'X6', name: 'X6', },
-        { id: '3', icon: 'el-icon-lollipop', label: 'Graph', name: 'Graph', },
+        { id: '1', icon: 'el-icon-lollipop', label: 'Graph', name: 'Graph', },
+        { id: '2', icon: 'el-icon-ice-cream-round', label: 'G6', name: 'G6', },
+        { id: '3', icon: 'el-icon-ice-cream-square', label: 'X6', name: 'X6', },
         { id: '4', icon: 'el-icon-potato-strips', label: 'JsPlumb', name: 'JsPlumb', },
         { id: '5', icon: 'el-icon-milk-tea', label: 'Table', name: 'Table', },
       ]
