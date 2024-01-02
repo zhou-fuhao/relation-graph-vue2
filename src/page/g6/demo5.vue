@@ -161,6 +161,8 @@ G6.registerEdge(
   'polyline',
 );
 
+let graph = null;
+
 export default {
   data() {
     return {
@@ -170,11 +172,14 @@ export default {
   mounted() {
     this.init();
   },
+  destroyed() {
+    graph.destroy();
+  },
   methods: {
     init() {
       const width = document.getElementById('container').scrollWidth || 800;
       const height = document.getElementById('container').scrollHeight || 800;
-      const graph = new G6.Graph({
+      graph = new G6.Graph({
         container: 'container',
         width,
         height,

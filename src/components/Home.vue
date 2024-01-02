@@ -1,7 +1,8 @@
 <template>
   <el-container class="app-home">
     <el-aside class="app-home-aside" width="220px">
-      <el-menu :router="true" :unique-opened="true">
+      <el-menu :router="true" :unique-opened="true" background-color="#001529" text-color="#ffffffa6"
+        active-text-color="#fff">
         <el-submenu :index="item.id" :key="item.id" v-for="(item) in menuData">
           <template slot="title">
             <i :class="item.icon"></i>
@@ -63,7 +64,7 @@ export default {
   border: 1px solid #eee;
 
   &-aside {
-    background-color: rgb(238, 241, 246);
+    background-color: #001529;
   }
 
   &-aside::-webkit-scrollbar {

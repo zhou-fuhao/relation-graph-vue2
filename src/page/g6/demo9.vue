@@ -4,7 +4,7 @@
 
 <script>
 import G6 from '@antv/g6';
-
+let graph = null;
 export default {
   data() {
     return {
@@ -31,7 +31,7 @@ export default {
       const height = 500 - 10;
       // const height = (container.scrollHeight || 500) - 40;
 
-      const graph = new G6.Graph({
+      graph = new G6.Graph({
         container: 'container',
         width,
         height,
@@ -115,6 +115,9 @@ export default {
   mounted() {
     this.init();
   },
+  destroyed() {
+    graph.destroy();
+  }
 }
 </script>
 

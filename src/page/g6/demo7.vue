@@ -4,92 +4,134 @@
 
 <script>
 import G6 from "@antv/g6";
+import lodash from 'lodash';
+let graph = null;
 
-G6.registerNode('file-node', {
-  draw: function draw(cfg, group) {
-    const keyShape = group.addShape('rect', {
-      attrs: {
-        x: 10,
-        y: -12,
-        fill: '#fff',
-        stroke: null,
-      },
-    });
-    let isLeaf = false;
-    if (cfg.collapsed) {
-      group.addShape('marker', {
-        attrs: {
-          symbol: 'triangle',
-          x: 4,
-          y: -2,
-          r: 4,
-          fill: '#666',
-        },
-        name: 'marker-shape',
-      });
-    } else if (cfg.children && cfg.children.length > 0) {
-      group.addShape('marker', {
-        attrs: {
-          symbol: 'triangle-down',
-          x: 4,
-          y: -2,
-          r: 4,
-          fill: '#666',
-        },
-        name: 'marker-shape',
-      });
-    } else {
-      isLeaf = true;
-    }
-    const shape = group.addShape('text', {
-      attrs: {
-        x: 15,
-        y: 4,
-        text: cfg.name,
-        fill: '#666',
-        fontSize: 16,
-        textAlign: 'left',
-        fontFamily:
-          typeof window !== 'undefined'
-            ? window.getComputedStyle(document.body, null).getPropertyValue('font-family') ||
-            'Arial, sans-serif'
-            : 'Arial, sans-serif',
-      },
-      name: 'text-shape',
-    });
-    const bbox = shape.getBBox();
-    let backRectW = bbox.width;
-    let backRectX = keyShape.attr('x');
-    if (!isLeaf) {
-      backRectW += 8;
-      backRectX -= 15;
-    }
-    keyShape.attr({
-      width: backRectW,
-      height: bbox.height + 4,
-      x: backRectX,
-    });
-    return keyShape;
+const data = {
+  isRoot: true,
+  id: 'Root',
+  label: '隔壁老王',
+  text: '\ue602', // 对应iconfont.css 里面的content，注意加u，后面的自行修改一下。
+  style: {
+    fill: 'red',
   },
-});
-G6.registerEdge(
-  'step-line',
-  {
-    getControlPoints: function getControlPoints(cfg) {
-      const startPoint = cfg.startPoint;
-      const endPoint = cfg.endPoint;
-      return [
-        startPoint,
-        {
-          x: startPoint.x,
-          y: endPoint.y,
-        },
-        endPoint,
-      ];
+  labelCfg: {
+    style: {
+      fill: 'red',
     },
   },
-  'polyline',
-);
+  backgroundConfig: null, // 自定义项，用于判读是否需要圆背景
+  size: 30,
+  children: [
+    {
+      id: 'SubTreeNode1',
+      label: '网咖',
+      text: '\ue620',
+      relation: '上网',
+      children: [
+        {
+          id: 'SubTreeNode2',
+          label: '多伦多',
+          text: '\ue62b',
+        },
+        {
+          id: 'id1',
+          label: '小王',
+          text: '\ue6ef',
+          children: [
+            {
+              id: 'SubTreeNode1.2.1',
+              label: '182****2123',
+              text: '\ue85a',
+            },
+            {
+              id: 'SubTreeNode4',
+              label: '今晚在吗',
+              text: '\ue692',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'SubTreeNode3',
+      label: 'subway',
+      text: '\ue6b5',
+      children: [
+        {
+          id: 'SubTreeNode3.1',
+          label: '王五',
+          text: '\ue679',
+        },
+        {
+          id: 'SubTreeNode3.2',
+          label: '张三',
+          text: '\ue63a',
+        },
+      ],
+    },
+    {
+      id: 'SubTreeNode5',
+      label: '小花',
+      relation: '老婆',
+      text: '\ue600',
+      backgroundConfig: {
+        fill: 'Coral',
+      },
+      style: {
+        fill: '#fff',
+      },
+      labelCfg: {
+        style: {
+          fill: 'Coral',
+        },
+      },
+      children: [
+        {
+          id: 'SubTreeNode1.2.2',
+          label: '182****2123',
+          text: '\ue629',
+          relation: '通话',
+          backgroundConfig: {
+            fill: 'Coral',
+          },
+          style: {
+            fill: '#fff',
+          },
+          labelCfg: {
+            style: {
+              fill: 'Coral',
+            },
+          },
+        },
+        {
+          id: 'SubTreeNode3.3',
+          label: '凶器',
+          text: '\ue655',
+          relation: '指纹',
+          backgroundConfig: {
+            fill: 'Coral',
+          },
+          style: {
+            fill: '#fff',
+          },
+          labelCfg: {
+            style: {
+              fill: 'Coral',
+            },
+          },
+        },
+      ],
+    },
+    {
+      id: 'SubTreeNode6',
+      label: '飞机',
+      relation: '乘坐',
+      text: '\ue656',
+    },
+  ],
+};
+
 export default {
   data() {
     return {
@@ -99,124 +141,137 @@ export default {
   mounted() {
     this.init();
   },
+  destroyed() {
+    if (typeof graph !== 'undefined') {
+      graph.destroy();
+    }
+  },
   methods: {
     init() {
-      const container = document.getElementById('container');
-      const el = document.createElement('div');
-      el.innerHTML = '缩进树-文件系统';
-      el.style.position = 'absolute';
-      el.style.margin = '8px';
-      container.appendChild(el);
-      
-      const width = container.scrollWidth;
-      const height = container.scrollHeight || 500;
-      const graph = new G6.TreeGraph({
-        container: 'container',
-        width,
-        height,
-        linkCenter: true,
-        modes: {
-          default: [
-            {
-              type: 'collapse-expand',
-              animate: false,
-              onChange: function onChange(item, collapsed) {
-                const data = item.get('model');
-                data.collapsed = collapsed;
-                return true;
-              },
-            },
-            'drag-canvas',
-            'zoom-canvas',
-          ],
-        },
-        defaultEdge: {
-          style: {
-            stroke: '#A3B1BF',
-          },
-        },
-        layout: {
-          type: 'indented',
-          isHorizontal: true,
-          direction: 'LR',
-          indent: 30,
-          getHeight: function getHeight() {
-            return 16;
-          },
-          getWidth: function getWidth() {
-            return 16;
-          },
-        },
-      });
-      const data = {
-        id: '1',
-        name: 'src',
-        children: [
-          {
-            id: '1-1',
-            name: 'behavior',
-            children: [],
-          },
-          {
-            id: '1-3',
-            name: 'graph',
-            children: [
-              {
-                id: '1-3-1',
-                name: 'controller',
-                children: [],
-              },
-            ],
-          },
-          {
-            id: '1-5',
-            name: 'item',
-            children: [],
-          },
-          {
-            id: '1-6',
-            name: 'shape',
-            children: [
-              {
-                id: '1-6-2',
-                name: 'extend',
-                children: [],
-              },
-            ],
-          },
-          {
-            id: '1-7',
-            name: 'util',
-            children: [],
-          },
-        ],
-      };
+      G6.registerNode('iconfont', {
+        draw(cfg, group) {
+          const { backgroundConfig: backgroundStyle, style, labelCfg: labelStyle } = cfg;
 
-      graph.node((node) => {
-        return {
-          type: 'file-node',
-          label: node.name,
-        };
+          if (backgroundStyle) {
+            group.addShape('circle', {
+              attrs: {
+                x: 0,
+                y: 0,
+                r: cfg.size,
+                ...backgroundStyle,
+              },
+              // must be assigned in G6 3.3 and later versions. it can be any value you want
+              name: 'circle-shape',
+            });
+          }
+
+          const keyShape = group.addShape('text', {
+            attrs: {
+              x: 0,
+              y: 0,
+              fontFamily: 'iconfont', // 对应css里面的font-family: "iconfont";
+              textAlign: 'center',
+              textBaseline: 'middle',
+              text: cfg.text,
+              fontSize: cfg.size,
+              ...style,
+            },
+            // must be assigned in G6 3.3 and later versions. it can be any value you want
+            name: 'text-shape1',
+          });
+          const labelY = backgroundStyle ? cfg.size * 2 : cfg.size;
+
+          group.addShape('text', {
+            attrs: {
+              x: 0,
+              y: labelY,
+              textAlign: 'center',
+              text: cfg.label,
+              ...labelStyle.style,
+            },
+            // must be assigned in G6 3.3 and later versions. it can be any value you want
+            name: 'text-shape1',
+          });
+          return keyShape;
+        },
       });
-      graph.edge(() => {
+
+      const COLOR = '#40a9ff';
+      graph = new G6.TreeGraph({
+        container: 'container',
+        modes: {
+          default: ['collapse-expand', 'drag-canvas', 'drag-node', 'zoom-canvas'],
+        },
+        fitView: true,
+        maxZoom: 1.5,
+        defaultNode: {
+          backgroundConfig: {
+            backgroundType: 'circle',
+            fill: COLOR,
+            stroke: 'LightSkyBlue',
+          },
+          type: 'iconfont',
+          size: 12,
+          style: {
+            fill: '#fff',
+          },
+          labelCfg: {
+            style: {
+              fill: COLOR,
+              fontSize: 12,
+            },
+          },
+        },
+        // 布局相关
+        layout: {
+          type: 'compactBox',
+          direction: 'LR',
+          getId(d) {
+            return d.id;
+          },
+          getHeight() {
+            return 16;
+          },
+          getWidth() {
+            return 16;
+          },
+          getVGap() {
+            return 20;
+          },
+          getHGap() {
+            return 60;
+          },
+        },
+      });
+
+      graph.edge(({ target }) => {
+        const fill = lodash.get(target, 'model.backgroundConfig') && lodash.get(target, 'model.backgroundConfig.fill');
         return {
-          type: 'step-line',
+          type: 'cubic-horizontal',
+          color: fill || COLOR,
+          label: lodash.get(target, 'model.relation') || '',
+          labelCfg: {
+            style: {
+              fill: fill || COLOR,
+              fontSize: 12,
+            },
+          },
         };
       });
 
       graph.data(data);
       graph.render();
-      graph.fitView();
-
-      if (typeof window !== 'undefined')
-        window.onresize = () => {
-          if (!graph || graph.get('destroyed')) return;
-          if (!container || !container.scrollWidth || !container.scrollHeight) return;
-          graph.changeSize(container.scrollWidth, container.scrollHeight);
-        };
+      // graph.fitView();
     }
   },
 };
 </script>
 
-<style lang="less" scpoed></style>
+<style lang="less" scpoed>
+@import "../../../static/font/iconfont.css";
+
+#container {
+  width: 100%;
+  height: calc(100vh - 64px);
+}
+</style>

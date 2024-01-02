@@ -1647,8 +1647,8 @@ export default {
 
           graph = new G6.Graph({
             container: 'container',
-            width: CANVAS_WIDTH,
-            height: CANVAS_HEIGHT,
+            // width: CANVAS_WIDTH,
+            // height: CANVAS_HEIGHT,
             linkCenter: true,
             minZoom: 0.1,
             groupByTypes: false,
@@ -1714,9 +1714,17 @@ export default {
   },
   mounted() {
     this.init();
+  },
+  destroyed() {
+    graph.destroy();
   }
 }
 </script>
 
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+#container {
+  width: 100%;
+  height: calc(100vh - 64px);
+}
+</style>

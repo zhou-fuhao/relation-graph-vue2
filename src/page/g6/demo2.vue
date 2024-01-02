@@ -117,6 +117,7 @@ const data = {
     }
   ]
 };
+let graph = null;
 
 export default {
   data() {
@@ -137,7 +138,7 @@ export default {
       const height = document.getElementById('container').scrollHeight || 800;
       // 实例化G6  
       // 因为我们用的是树图，所以这里是G6.TreeGraph(),还有其他，像是普通图的配置G6.Graph(),一般y用的比较多的就像是树图这种，还有组织架构图一类的。
-      const graph = new G6.TreeGraph({
+      graph = new G6.TreeGraph({
         // 图的  DOM 容器，对应上面我们定义的id
         container: 'container',
         width,
@@ -306,6 +307,9 @@ export default {
   created() { },
   mounted() {
     this.init();
+  },
+  destroyed() {
+    graph.destroy();
   }
 }
 </script>

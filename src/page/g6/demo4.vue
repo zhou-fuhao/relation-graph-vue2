@@ -626,6 +626,9 @@ const dataTransform = (data) => {
     edges,
   };
 }
+
+let graph = null;
+
 export default {
   data() {
     return {
@@ -640,14 +643,9 @@ export default {
       descriptionDiv.style.position = 'absolute';
       descriptionDiv.style.margin = '8px';
       container.appendChild(descriptionDiv);
-
-      const width = container.scrollWidth;
-      const height = 500 - 20;
-      // const height = (container.scrollHeight || 500) - 20;
-      const graph = new G6.Graph({
+      
+      graph = new G6.Graph({
         container: 'container',
-        width,
-        height,
         defaultNode: {
           size: [300, 400],
           type: 'dice-er-box',
@@ -693,10 +691,18 @@ export default {
   created() { },
   mounted() {
     this.init();
+  },
+  destroyed() {
+    graph.destroy();
   }
 }
 
 </script>
 
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+#container {
+  width: 100%;
+  height: calc(100vh - 64px);
+}
+</style>

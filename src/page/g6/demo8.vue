@@ -276,6 +276,9 @@ const defaultLabelCfg = {
     fontSize: 12,
   },
 };
+
+let graph = null;
+
 export default {
   data() {
     return {
@@ -297,7 +300,7 @@ export default {
       const minimap = new G6.Minimap({
         size: [150, 100],
       });
-      const graph = new G6.TreeGraph({
+      graph = new G6.TreeGraph({
         container: 'container',
         width,
         height,
@@ -379,6 +382,9 @@ export default {
   mounted() {
     this.init();
   },
+  destroyed() {
+    graph.destroy();
+  }
 }
 </script>
 

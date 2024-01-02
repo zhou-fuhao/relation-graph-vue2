@@ -440,7 +440,7 @@ const dataTransform = (data) => {
   };
   return changeData(data);
 };
-
+let graph = null;
 export default {
   data() {
     return {
@@ -457,9 +457,8 @@ export default {
       container.appendChild(el);
 
       const width = container.scrollWidth;
-      const height = 500 - 20;
-      // const height = (container.scrollHeight || 500) - 20;
-      const tree = new G6.TreeGraph({
+      const height = (document.body.clientHeight || 500) - 48;
+      graph = new G6.TreeGraph({
         container: 'container',
         width,
         height,
@@ -498,15 +497,18 @@ export default {
         },
       });
 
-      tree.data(dataTransform(rawData));
+      graph.data(dataTransform(rawData));
 
-      tree.render();
+      graph.render();
 
     }
   },
   created() { },
   mounted() {
     this.init();
+  },
+  destroyed() {
+    graph.destroy();
   }
 }
 </script>

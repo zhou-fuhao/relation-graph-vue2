@@ -389,6 +389,7 @@ const data = {
     },
   ],
 };
+let graph = null;
 export default {
   data() {
     return {
@@ -397,6 +398,9 @@ export default {
   },
   mounted() {
     this.init();
+  },
+  destroyed() {
+    graph.destroy();
   },
   methods: {
     init() {
@@ -407,9 +411,9 @@ export default {
       descriptionDiv.style.margin = '8px';
       container.appendChild(descriptionDiv);
 
-      const width = container.scrollWidth ||'100%';
+      const width = container.scrollWidth || '100%';
       const height = container.scrollHeight || 500;
-      const graph = new G6.TreeGraph({
+      graph = new G6.TreeGraph({
         container: 'container',
         width,
         height,
